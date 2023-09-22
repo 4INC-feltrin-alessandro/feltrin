@@ -10,14 +10,14 @@ public class Supermercato {
     private String nome;
     private Prodotto[] prodotti;
 
-    public Supermercato(String indirizzo, String nome, String[] prodotti,
+    public Supermercato(String indirizzo, String nome, 
             double[] prezzo, double[] iva, double[] peso, double[] tara,
             String[] descrizione, String[] codiceBarre) {
         this.indirizzo = indirizzo;
         this.nome = nome;
 
         caricaProdotti(prezzo, iva, peso, tara, descrizione, codiceBarre);
-
+        
     }
 
     private void caricaProdotti(double[] prezzo, double[] iva,
@@ -35,6 +35,16 @@ public class Supermercato {
     public String getNome() {
         return nome;
     }
+    
+    private void addProdotto(double prezzo, double iva, double peso, double tara, String descrizione, String codiceBarre){
+    this.prodotti = new Prodotto[4];
+    this.prodotti[prodotti.length+1]= new Prodotto(prezzo, iva, peso, tara, descrizione, codiceBarre);
+
+    }
+    
+    public String add(double prezzo, double iva, double peso, double tara, String descrizione, String codiceBarre){
+        addProdotto(prezzo, iva, peso, tara, descrizione, codiceBarre);
+    return "";}
 
     public String prezzAlto() {
 
