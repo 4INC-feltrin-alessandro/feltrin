@@ -31,6 +31,7 @@ public class SupermercatoMain {
         System.out.println(sp.stampa());
         System.out.println(sp.add(4.0, 22, 2.2, 4.0, "mele", "805141108037"));
         System.out.println(sp.stampa());
+        
 
     }
     
