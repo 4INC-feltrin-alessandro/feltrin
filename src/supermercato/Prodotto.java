@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package supermercato;
 
 
@@ -14,13 +11,22 @@ public class Prodotto {
     private String descrizione;
     private String codiceBarre;
 
-    public Prodotto(double prezzo, double iva, double peso, double tara, String descrizione, String codiceBarre) {
+    public Prodotto(double prezzo, double iva, double peso, double tara, String codiceBarre, String descrizione) {
         this.prezzo = prezzo;
         this.iva = iva;
         this.peso = peso;
         this.tara = tara;
         this.descrizione = descrizione;
         this.codiceBarre = codiceBarre;
+    }
+    
+    public Prodotto(Prodotto p){
+        this.prezzo = p.prezzo;
+        this.iva = p.iva;
+        this.peso = p.peso;
+        this.tara = p.tara;
+        this.descrizione = p.descrizione;
+        this.codiceBarre = p.codiceBarre;
     }
 
     public double getTara() {

@@ -1,128 +1,131 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package supermercato;
 
+
+import java.util.Arrays;
+
 public class Supermercato {
-
-    private String indirizzo;
     private String nome;
+    private String indirizzo;
+    /**
+     * prodotti è un'array della classe Prodotto
+     */
     private Prodotto[] prodotti;
+    private int diml;
 
-    public Supermercato(String indirizzo, String nome, 
-            double[] prezzo, double[] iva, double[] peso, double[] tara,
-            String[] descrizione, String[] codiceBarre) {
-        this.indirizzo = indirizzo;
+    public Supermercato(String nome, String indirizzo, Prodotto[] prodotti) {
         this.nome = nome;
-
-        caricaProdotti(prezzo, iva, peso, tara, descrizione, codiceBarre);
-        
+        this.indirizzo = indirizzo;
+        this.prodotti = prodotti;
     }
 
-    private void caricaProdotti(double[] prezzo, double[] iva,
-            double[] peso, double[] tara, String[] descrizione, String[] codiceBarre) {
-        this.prodotti = new Prodotto[prezzo.length];
-        for (int i = 0; i < prezzo.length; i++) {
-            this.prodotti[i] = new Prodotto(prezzo[i], iva[i], peso[i], tara[i], descrizione[i], codiceBarre[i]);
-        }
-    }
+    /**
+     * restituisce il nome del prodotto che hai il prezzo ivato più alto
+     * @return
+     */
+    public String prezzoAlto() {
+        String prodottoPiuCostoso = prodotti[0].getDescrizione();
+        double prezzoAlto = prodotti[0].prezzoIvato();
 
-    public String getIndirizzo() {
-        return indirizzo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-    
-    private void addProdotto(double prezzo, double iva, double peso, double tara, String descrizione, String codiceBarre){
-    this.prodotti = new Prodotto[4];
-    this.prodotti[prodotti.length+1]= new Prodotto(prezzo, iva, peso, tara, descrizione, codiceBarre);
-
-    }
-    
-    public String add(double prezzo, double iva, double peso, double tara, String descrizione, String codiceBarre){
-        addProdotto(prezzo, iva, peso, tara, descrizione, codiceBarre);
-    return "";}
-
-    public String prezzAlto() {
-
-        int iMax = 0;
-        for (int i = 1; i < prodotti.length; i++) {
-            if (prodotti[iMax].prezzoIvato() < prodotti[i].prezzoIvato()) {
-                iMax = i;
-
+        for (Prodotto p: prodotti) {
+            if (prezzoAlto < p.prezzoIvato()) {
+                prezzoAlto = p.prezzoIvato();
+                prodottoPiuCostoso = p.getDescrizione();
             }
-
         }
 
-        return "il prodotto con il prezzo più alto è "
-                + prodotti[iMax].getDescrizione() + " e costa: " + prodotti[iMax].prezzoIvato();
+        return prodottoPiuCostoso;
     }
 
-    public String valoreMerce() {
-        String ris = "";
-        double somma = 0;
+    /**
+     * restituisce l’importo totale di tutti i prodotti al netto dell’Iva
+     * @return
+     */
+    public double valoreMerce() {
+        double importoTotale = 0;
 
-        for (int i = 0; i < prodotti.length; i++) {
-            somma = somma + prodotti[i].getPrezzo();
+        for (Prodotto p: prodotti)
+            importoTotale += p.getPrezzo();
 
-        }
-
-        return "il valore totale della merce è: " + somma;
+        return importoTotale;
     }
 
     public String pesoMinore() {
-        int iMin = 0;
-        for (int i = 1; i < prodotti.length; i++) {
-            if (prodotti[iMin].getPeso() > prodotti[i].getPeso()) {
-                iMin = i;
+        String descrizioneProdottoPiuLeggero = prodotti[0].getDescrizione();
+        double pesoProdottoPiuLeggero = prodotti[0].getPeso();
 
+        for (Prodotto p: prodotti)
+            if (pesoProdottoPiuLeggero > p.getPeso()) {
+                pesoProdottoPiuLeggero = p.getPeso();
+                descrizioneProdottoPiuLeggero = p.getDescrizione();
             }
-        }
-        return "il prodotto con il peso minore è " + prodotti[iMin].getDescrizione()
-                + " e pesa: " + prodotti[iMin].getPeso();
+
+        return descrizioneProdottoPiuLeggero;
     }
 
     public String merciSopraMedia() {
-        double media = 0;
-        String testo = "";
-        String ris = "maggiore";
-        for (int i = 0; i < prodotti.length; i++) {
-            media = media + prodotti[i].getPrezzo();
+        double sommaValori = 0;
+        double valoreMedio = 0;
+        String prodottiSopraLaMedia = "";
+
+        for (Prodotto p: prodotti)
+            sommaValori += p.getPrezzo();
+
+        valoreMedio = sommaValori / prodotti.length;
+
+        for (int i = 1; i < prodotti.length; i++) {
+            if (valoreMedio < prodotti[i].prezzoIvato())
+                prodottiSopraLaMedia += prodotti[i].getDescrizione();
+            if (i != prodotti.length - 1)
+                prodottiSopraLaMedia += ", ";
         }
-        media = media / prodotti.length + 1;
 
-        for (int i = 0; i < prodotti.length; i++) {
-            if (prodotti[i].getPrezzo() < media) {
-                ris = "minore";
-            }
-
-            testo += "prodotto: " + prodotti[i].getDescrizione() + "  ----  prezzo: " + ris + "\n";
-
+        return prodottiSopraLaMedia;
+    }
+   
+    public void addProdotto(double prezzo, double iva, double peso, double tara, String descrizione, String codiceBarre) {
+        Prodotto[] nuovoArray = new Prodotto[this.prodotti.length + 1];
+        for (int i = 0; i < this.prodotti.length; i++) {
+            nuovoArray[i] = this.prodotti[i];
         }
-
-        return testo;
+        nuovoArray[this.prodotti.length] = new Prodotto(prezzo, iva, peso, tara, descrizione, codiceBarre);
+        this.prodotti = nuovoArray;
+    }
+  /*  
+    public void addProd(Prodotto pAdd){
+        if (diml >= this.prodotti.length)
+            prodotti = resize((prodotti.length*20)/100);
+        prodotti[diml]=pAdd;
+        diml++;
+    }
+*/
+    public String stampaArray() {
+        String txt = "";
+        for (int i = 0; i < this.prodotti.length; i++) {
+            txt += this.prodotti[i].getDescrizione()+ "\n";
+        }
+        return txt;
     }
 
-    public String stampa() {
-        String testo = "nome supermercato: " + nome + "  ----  indirizzo: " + indirizzo + "\n";
 
+    @Override
+    public String toString() {
+        String t = "Supermercato{" + "\n" +
+                "\tnome: \"" + nome + '\"' + "\n" +
+                "\tindirizzo: \"" + indirizzo + '\"' + "\n" +
+                "\tprodotti = " + "\n";
         for (int i = 0; i < prodotti.length; i++) {
-
-            testo += "\n" + "descrizione prodotto: " + prodotti[i].getDescrizione()
-                    + "\n" + "prezzo: " + prodotti[i].getPrezzo() + "\n"
-                    + "peso prodotto:" + prodotti[i].getPeso() + "\n" + "tara: "
-                    + prodotti[i].getTara() + "\n" + "iva: " + prodotti[i].getIva() + "\n"
-                    + "codice a barre: " + prodotti[i].getCodiceBarre() + "\n";
+            t +="Prodotto {" + "\n" +
+                "\tprezzo = " + prodotti[i].getPrezzo() + "\n" +
+                "\tiva = " + prodotti[i].getIva() + "\n" +
+                "\tpeso = " + prodotti[i].getPeso() + "\n" +
+                "\ttara = " + prodotti[i].getTara() + "\n" +
+                "\tdescrizione = \"" + prodotti[i].getDescrizione() + '\"' + "\n" +
+                "\tcodiceABarre = " + prodotti[i].getCodiceBarre() + "\n" +
+                "}\n";
         }
-
-        return testo;
+        return t;
     }
-
 }
-
 
 
 

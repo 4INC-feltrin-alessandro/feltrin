@@ -5,10 +5,7 @@
  */
 package prova;
 
-/**
- *
- * @author ALESSANDRO.FELTRIN
- */
+
 public class Prova {
     
 }
