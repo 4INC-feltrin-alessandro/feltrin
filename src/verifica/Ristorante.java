@@ -1,28 +1,28 @@
 package verifica;
 public class Ristorante {
     
-    private int capienzaTav;
-    private int totTav;
-    private Tavolo[] tavoli;
-    
-    public Ristorante(Tavolo[] t){
-        /*for(int i = 0; i < t.length; i++){
-            tavoli[i] = new Tavolo(t[i]);
-        }*/
-        this.tavoli = t;
-        this.totTav = tavoli.length;
-        this.capienzaTav = this.totTav;
+    private int capienzaSale;
+    private int totSale;
+    private Sala[] sale;
+
+    public Ristorante(int capienzaSale, int totSale, Sala[] sale) {
+        this.capienzaSale = capienzaSale;
+        this.totSale = totSale;
+        this.sale = sale;
     }
-    
-    private int cercaTav(int numTav){
+   
+      
+    /*
+    private int cercaSala(int numSala){
         int indice = 0;
-        while(indice < totTav && tavoli[indice].getNumTav() != numTav)
+        while(indice < totSale && sale[indice]. != numSala)
             indice++;
         return indice;
-    }
+    }*/
+    
     
     public boolean siediti(int numTav){
-        return tavoli[cercaTav(numTav)].siediti();
+        return sala[cercaTav(numTav)].siediti();
     }
     
     public boolean alzati(int numTav){
@@ -76,3 +76,4 @@ public class Ristorante {
         shiftSx(cercaTav(numTav));
     }
 }
+

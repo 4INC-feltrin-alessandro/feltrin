@@ -12,7 +12,7 @@ public class VerificaMain {
         for(int i = 0; i < t.length; i++)
             t[i] = new Tavolo(capienza[i], numPers[i], numTav[i], prenotato[i]);
         
-        Ristorante r = new Ristorante(t);
+        Sala r = new Sala(t);
         
         System.out.println("Siediti: " + r.siediti(67));
         System.out.println("Alzati: " + r.alzati(21));
