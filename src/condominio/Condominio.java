@@ -21,19 +21,35 @@ public class Condominio {
         }
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+
+    public Appartamento[] getAppartamenti() {
+        return appartamenti;
+    }
+    
+    
+
     public Condominio(Condominio condo) {
         this.nome=condo.nome;
         this.indirizzo=condo.indirizzo;
         this.appartamenti=condo.appartamenti;
     }
     
-    public String toString(){
-    String testo="";
+   @Override
+    public String toString() {
+        String risult = "nome:"+nome+"  indirizzo:"+indirizzo+"\n";
+        for(int i=0 ; i<appartamenti.length ; i++)
+            risult+="Appartamenti["+i+"]:"+appartamenti[i].toString()+"\n";
+        return risult;
+    }
     
-        for (int i = 0; i < appartamenti.length; i++) {
-            testo+=appartamenti[i].toString();
-        }
-    return testo;}
+
     
     
     public String appartamentoMaxMill(){
@@ -45,6 +61,11 @@ public class Condominio {
         }
     
     return appartamenti[iMax].getProprietario();}
+    
+    
+    public int nAppartamenti(){
+    
+    return appartamenti.length;}
             
     
     

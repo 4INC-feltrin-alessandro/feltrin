@@ -23,8 +23,14 @@ public class CondominioMain {
   
         Appartamento[] appa={ap,ap1,ap2};
         Condominio con=new Condominio("mac1", "vi degasperi", appa);
-        System.out.println(con.toString());
-        System.out.println(con.appartamentoMaxMill());
+        //System.out.println(con.toString());
+        //System.out.println(con.appartamentoMaxMill());
+        
+        Amministrazione am=new Amministrazione(5);
+        am.addCondomini(con);
+        am.addCondomini(con);
+        am.addCondomini(con);
+        System.out.println(am.toString());
     }
     
 }
