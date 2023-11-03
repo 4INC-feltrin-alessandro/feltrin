@@ -1,28 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package classe;
 
-/**
- *
- * @author alessandro
- */
 public class StudenteMain {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        Studente st1=new Studente("felt","ale");
-        Studente st2=new Studente("giacomoni","luca");
-        Studente st3=new Studente("osati","federico");
-        Studente[] studenti={st1,st2,st3};
-        
-        Classe inc=new Classe(st3, studenti);
-        
-        //System.out.println(st1.toString());
-        System.out.println(inc.toString());
+        Studente test = null;
+        Studente test1 = null;
+        Studente test2 = null;
+        Studente test3 = null;
+        try{
+            test = new Studente("Giacomo Antonio", "Calo'");
+            test1 = new Studente("Gianluca", "Fortarel");
+            test2 = new Studente("Luca", "Goller");
+            test3 = new Studente("Danilo", "Telch");
+            
+            Studente[] st = {test, test1, test2};
+            Classe cl = new Classe (test1, st);
+            System.out.println(cl);
+        }catch(Exception e){
+            System.err.println(e);
+        }
     }
-    
 }
