@@ -1,28 +1,32 @@
 package classe;
 
 public class Studente {
-    private String nome;
+
     private String cognome;
-    
-    public Studente(String nome , String cognome)throws Exception{
+    private String nome;
+
+    public Studente(String cognome, String nome)throws Exception {
         setNome(nome);
         setCognome(cognome);
     }
-    
-    public Studente(Studente studente){
-        nome = studente.nome;
-        cognome = studente.cognome;
-    }
-    
-    public final void setNome(String nome)throws Exception{
-        this.nome = ctrNome(nome);
+
+    public Studente(Studente studente) {
+
+        this.cognome = studente.cognome;
+        this.nome = studente.nome;
+
     }
 
-    public final void setCognome(String cognome) throws Exception{
-        this.cognome = ctrNome(cognome);
+    public final void setNome(String nome)throws Exception {
+        this.nome = controllo(nome);
+    }
+
+    public final void setCognome(String cognome)throws Exception {
+        this.cognome = controllo(cognome);
     }
     
-    private String ctrNome(String nome)throws Exception{
+    private String controllo(String nome) throws Exception {
+        
         nome = nome.trim();
         try{
             if(nome.isEmpty()){
@@ -42,18 +46,21 @@ public class Studente {
         }
         return nome;
     }
+  
+    
+    public String getCognome() {
+        return cognome;
+    }
 
     public String getNome() {
         return nome;
     }
 
-    public String getCognome() {
-        return cognome;
+    public String toString() {
+
+        String t = "";
+
+        return t = "\nNOME: " + nome + "\nCOGNOME: " + cognome;
     }
 
-    @Override
-    public String toString() {
-        return "nome:"+nome+"  cognome:"+cognome;
-    }
-    
 }

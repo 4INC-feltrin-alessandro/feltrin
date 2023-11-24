@@ -1,53 +1,61 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package classe;
 
 public class Classe {
-    private Studente capoclasse;
+
+    private Studente capoClasse;
     private Studente[] studenti;
 
-    public Classe(Studente capoclasse, Studente[] studenti) {
-        this.capoclasse = capoclasse;
-        this.studenti = studenti;
-        
-    
+    public Classe(Studente capoClasse, Studente[] studenti) throws Exception {
+        this.studenti = new Studente[studenti.length];
+        for (int i = 0; i < studenti.length; i++) {
+            this.studenti[i] = new Studente(studenti[i]);
+
+        }
+        setCapoClasse(capoClasse);
     }
 
-    public Studente getCapoclasse() {
-        return capoclasse;
-    }
-
-    public void setCapoclasse(Studente capoclasse) {
-        this.capoclasse = capoclasse;
+    public Studente getCapoClasse() {
+        return capoClasse;
     }
 
     public Studente[] getStudenti() {
         return studenti;
     }
 
+    public void setCapoClasse(Studente capoClasse) {
+        this.capoClasse = capoClasse;
+    }
+
     public void setStudenti(Studente[] studenti) {
         this.studenti = studenti;
     }
 
-    public void invertiAttributi(){
-    
-    //inverte attributi??
-    }
-    
-    public String toString(){
-    String testo="";
+    public void invertiAttributi() throws Exception {
+        String cognome = capoClasse.getNome();
+        String nome = capoClasse.getCognome();
+        capoClasse.setCognome(cognome);
+        capoClasse.setNome(nome);
+
         for (int i = 0; i < studenti.length; i++) {
-            testo+=studenti[i].toString();
+            cognome = studenti[i].getNome();
+            nome = studenti[i].getCognome();
+            studenti[i].setCognome(cognome);
+            studenti[i].setNome(nome);
         }
-        testo+="capo classe: \n"+capoclasse;
-        
-    
-    return testo;}
 
+    }
 
+    public String toString() {
 
+        String t = "";
 
+        t = "\nIL CAPOCLASSE è: " + capoClasse + "\n";
+
+        for (int i = 0; i < studenti.length; i++) {
+            t += studenti[i].toString();
+
+        }
+        return t;
+    }
 
 }

@@ -39,6 +39,19 @@ public class Orologio {
         }
         return testo;
     }
+    
+    public void aggiungiOre(int ore){
+        if (ora+ore<24){
+        this.ora= this.ora+ore;
+        }
+    }
+    
+     public void aggiungiOreOgg(Orologio ore){
+        this.ora= this.ora+ore.ora;
+        this.minuti= this.minuti+ore.minuti;
+        this.secondi= this.secondi+ore.secondi;
+    
+    }
 
     public String dammiOrario() {
         

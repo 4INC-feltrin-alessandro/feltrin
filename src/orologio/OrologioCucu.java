@@ -25,6 +25,17 @@ public class OrologioCucu extends Orologio{
     public String toString() {
         return super.toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
+
+    @Override
+    public void aggiungiOre(int ore) {
+        super.aggiungiOre(ore); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void aggiungiOreOgg(Orologio ore) {
+        super.aggiungiOreOgg(ore); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
     
 }
